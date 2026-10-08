@@ -34,11 +34,11 @@ import static guru.nidi.graphviz.model.Factory.node;
  */
 public class Main {
 
-    private static final int ID_LENGTH = 8;  // 主键ID的长度，bigInt占8个字节
+    private static final int ID_LENGTH = 4;  // 主键ID的长度，bigInt占8个字节
 
     public static void main(String[] args) {
 
-        String ibdFilePath = "/Users/dadudu/idea/cpp/mysql-server/mysql5.7_build/build_out/data/my_db/t2.ibd";
+        String ibdFilePath = "D://t1.ibd";
 
         Path path = Paths.get(ibdFilePath);
 
@@ -91,7 +91,7 @@ public class Main {
                         while (currentOffset != PAGE_NEW_SUPREMUM) {
 
                             // 目前只支持int类型（4个字节）的主键id
-                            long id = ByteBufferUtil.machReadFrom8(byteBuffer, currentOffset) & 0x7fff;
+                            long id = ByteBufferUtil.machReadFrom4(byteBuffer, currentOffset) & 0x7fff;
                             int childPageNo = ByteBufferUtil.machReadFrom4(byteBuffer, currentOffset + ID_LENGTH);
                             NodePtr nodePtr = new NodePtr();
                             nodePtr.setId(id);

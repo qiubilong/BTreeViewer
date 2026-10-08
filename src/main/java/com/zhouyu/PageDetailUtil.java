@@ -18,8 +18,8 @@ import static com.zhouyu.PageUtil.PAGE_SIZE;
 public class PageDetailUtil {
 
     public static void main(String[] args) {
-        String ibdFilePath = "/Users/dadudu/idea/cpp/mysql-server/mysql5.7_build/build_out/data/my_db/t2.ibd";
-        int pageNo = 4;
+        String ibdFilePath = "D://t1.ibd";
+        int pageNo = 3;
         Path path = Paths.get(ibdFilePath);
 
         try (FileChannel fileChannel = FileChannel.open(path, StandardOpenOption.READ)) {
@@ -39,7 +39,7 @@ public class PageDetailUtil {
             if (PageType.FIL_PAGE_INDEX.equals(pageType)) {
                 int currentOffset = PAGE_NEW_INFIMUM + IndexPageUtilUtil.getNextRecOffs(byteBuffer, PAGE_NEW_INFIMUM);
                 while (currentOffset != PAGE_NEW_SUPREMUM) {
-                    long id = ByteBufferUtil.machReadFrom8(byteBuffer, currentOffset) & 0x7fff;
+                    long id = ByteBufferUtil.machReadFrom4(byteBuffer, currentOffset) & 0x7fff;
                     System.out.println(id);
                     currentOffset = currentOffset + IndexPageUtilUtil.getNextRecOffs(byteBuffer, currentOffset);
                 }

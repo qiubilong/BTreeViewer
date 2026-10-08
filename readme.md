@@ -24,6 +24,3 @@ gu install js
 ![img.png](img.png)
 
 修改Main.Java中的ibdFilePath变量的值为ibd文件的绝对路径即可使用
-
-如需交流可添加微信：
-![wx.png](wx.jpg)
